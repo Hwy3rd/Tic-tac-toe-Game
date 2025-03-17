@@ -62,6 +62,7 @@ playAgainBtn.addEventListener("click", () => {
   result.parentElement.style.display = "none";
   marked = new Array(10);
   turn = 1;
+  gameEnded = false;
   turnsDisplay.textContent = turn;
   cells.forEach((cell) => {
     cell.textContent = "";
