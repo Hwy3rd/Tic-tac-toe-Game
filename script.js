@@ -4,6 +4,7 @@ const turnsDisplay = document.getElementById("turns");
 const result = document.getElementById("result");
 const playAgainBtn = document.getElementById("play-again-btn");
 let turn = 1;
+let gameEnded = false;
 let marked = new Array(10);
 
 const gameplay = (cell, index) => {
@@ -15,9 +16,8 @@ const gameplay = (cell, index) => {
     cell.textContent = "O";
   }
   marked[index] = cell.textContent;
-  console.log(marked);
-  console.log(isWinning());
-  if (isWinning()) {
+  gameEnded = isWinning();
+  if (gameEnded) {
     const player = turn % 2 ? "Player 1" : "Player 2";
     endGame(player);
   } else if (turn === 10) {
@@ -70,11 +70,11 @@ playAgainBtn.addEventListener("click", () => {
 
 cells.forEach((cell) => {
   cell.addEventListener("click", () => {
-    if (!cell.textContent) {
+    if (!cell.textContent && !gameEnded) {
       const index = cell.classList[1].slice(5, 6);
       gameplay(cell, index);
     } else {
-      alert("Invalid move!! Try another cell");
+      alert("Invalid move!! Try again");
     }
   });
 });
